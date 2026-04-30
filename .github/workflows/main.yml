@@ -1,0 +1,40 @@
+name: MERN CI/CD Pipeline
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    # Install backend dependencies
+    - name: Install Backend Dependencies
+      run: npm install
+
+    # Install frontend dependencies
+    - name: Install Frontend Dependencies
+      run: |
+        cd frontend
+        npm install
+
+    # Optional: Run tests (if present)
+    - name: Run Tests
+      run: |
+        echo "No tests yet"
+
+    # Build frontend
+    - name: Build Frontend
+      run: |
+        cd frontend
+        npm run build
